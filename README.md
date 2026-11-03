@@ -1,39 +1,37 @@
-# SI3003 — Proyecto Final: NeuroPattern Agent
+# EEG-Agent: Análisis Espectral y Educativo de Bandas EEG
 
-## Información General
-- **Integrantes:** Alejandro Lotero Valencia
-- **Curso:** Inteligencia Artificial (SI3003)
-- **Alternativa elegida:** Opción B — Agente con herramientas
-
----
-
-## 1. Definición del Problema
-
-### ¿Qué problema se quiere resolver?
-El análisis exploratorio de registros de actividad neuronal (series temporales de picos o características espectrales) suele requerir la ejecución de scripts manuales y análisis estadísticos repetitivos. Se desarrollará un prototipo de agente inteligente orientado a estudiantes e investigadores de neurociencia que permita realizar consultas conversacionales sobre datos de actividad neuronal, automatizando la detección de patrones anómalos.
-
-### ¿Qué preguntas o tareas atenderá el prototipo?
-El agente podrá responder a solicitudes como:
-- *"Realiza una revisión general del Paciente 1."*
-- *"¿Se detectan picos de disparo o anomalías en la señal del Paciente 2?"*
-- *"Analiza el archivo CSV cargado y determina si su tasa de disparo supera los umbrales normales."*
-
-### ¿Por qué la Opción B (Agente con herramientas)?
-La arquitectura de agente permite integrar la capacidad conversacional y la flexibilidad de un modelo de lenguaje (LLM) con funciones deterministas en Python (usando NumPy y Scikit-learn). De esta manera, el modelo no alucina ni calcula métricas complejas directamente, sino que decide cuándo invocar herramientas numéricas exactas para procesar los patrones neuronales.
-
-### Alcance y Limitaciones
-**Fuera del alcance:**
-- Entrenamiento de redes neuronales desde cero o modelos de Deep Learning pesados.
-- Procesamiento de archivos de neuroimagen crudos (como fMRI o EEG multicanal en formatos complejos tipo BDF/EDF).
-- Validación de formatos CSV arbitrarios que no cumplan con el esquema predefinido del sistema.
+**Asignatura:** SI3003 — Inteligencia Artificial  
+**Estudiante:** Alejandro Lotero Valencia  
+**Alternativa seleccionada:** Opción B — Agente con herramientas  
 
 ---
 
-## 2. Datos y Herramientas
+## 1. Descripción del Problema
+El electroencefalograma (EEG) registra la actividad eléctrica cerebral a través de oscilaciones agrupadas en bandas de frecuencia (**Delta, Theta, Alpha y Beta**). Para los estudiantes, identificar estas bandas, calcular su potencia y relacionarlas con la neurofisiología suele ser complejo. Este proyecto implementa un agente inteligente que automatiza este análisis mediante herramientas de procesamiento de señales y consulta teórica.
 
-### Origen de los datos
-Se utilizarán conjuntos de datos reales en formato CSV obtenidos de repositorios públicos de investigación y plataformas de ciencia de datos (como Kaggle), correspondientes a registros de series temporales de actividad neuronal y métricas electrofisiológicas. Los archivos de prueba estarán disponibles en la carpeta `data/` de este repositorio.
+**No realiza diagnósticos clínicos ni interpretaciones médicas individuales.**
 
-### Herramientas definidas para el Agente
-1. `analizar_patron_neuronal`: Recibe el identificador de un paciente o la ruta a un archivo CSV. Calcula métricas de dispersión, desviaciones estándar y ejecuta un algoritmo de detección de anomalías (como *Isolation Forest* o umbrales estadísticos) para identificar picos de actividad anormales.
-2. `consultar_base_clinica_neuro`: Cruza los hallazgos cuantitativos devueltos por la primera herramienta con una base de conocimiento teórica/clínica para contextualizar el tipo de patrón detectado.
+---
+
+## 2. Arquitectura y Herramientas del Agente
+El LLM decide dinámicamente el uso de tres herramientas implementadas en Python (máximo 3 llamadas por consulta):
+
+1. `analizar_senal_eeg()`: Valida los datos, calcula el espectro mediante FFT/Welch y estima la potencia relativa de las cuatro bandas.
+2. `consultar_conceptos_eeg()`: Consulta una base de conocimiento local en formato JSON sobre ritmos cerebrales, artefactos y fundamentos neurofisiológicos.
+3. `comparar_bandas()`: Evalúa las potencias relativas, identifica la banda predominante y organiza las diferencias porcentuales.
+
+---
+
+## 3. Fuentes de Datos
+* Se emplearán registros normalizados de EEG (en formato compatible con Pandas/MNE) correspondientes a sesiones de referencia educativa (como repositorios abiertos de elctrofisiología y datos de ejemplo en `data/`).
+
+---
+
+## 4. Casos de Prueba
+1. **Consulta conceptual:** Preguntar por las características neurofisiológicas de la banda *alpha*.
+2. **Comparación conceptual:** Diferenciar entre los ritmos *theta* y *delta*.
+3. **Análisis de señal:** Procesar una señal de ejemplo para identificar la banda de mayor potencia relativa.
+4. **Análisis integrado:** Combinar la ejecución de FFT y la consulta teórica para explicar el significado de la señal analizada.
+5. **Caso límite:** Realizar una consulta sobre diagnóstico de epilepsia para verificar que el agente reconozca sus limitaciones y rechace el diagnóstico clínico.
+
+---
