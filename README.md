@@ -9,8 +9,8 @@
 
 ## 1. Definición del Problema
 
-### ¿Qué problema queremos resolver y para quién?
-El análisis exploratorio de registros de actividad neuronal (series temporales de picos o características espectrales) suele requerir la ejecución de scripts manuales y análisis estadísticos repetitivos. Desarrollaremos un prototipo de agente inteligente orientado a estudiantes e investigadores de neurociencia que permita realizar consultas conversacionales sobre datos de actividad neuronal, automatizando la detección de patrones anómalos.
+### ¿Qué problema se quiere resolver?
+El análisis exploratorio de registros de actividad neuronal (series temporales de picos o características espectrales) suele requerir la ejecución de scripts manuales y análisis estadísticos repetitivos. Se desarrollará un prototipo de agente inteligente orientado a estudiantes e investigadores de neurociencia que permita realizar consultas conversacionales sobre datos de actividad neuronal, automatizando la detección de patrones anómalos.
 
 ### ¿Qué preguntas o tareas atenderá el prototipo?
 El agente podrá responder a solicitudes como:
@@ -18,7 +18,7 @@ El agente podrá responder a solicitudes como:
 - *"¿Se detectan picos de disparo o anomalías en la señal del Paciente 2?"*
 - *"Analiza el archivo CSV cargado y determina si su tasa de disparo supera los umbrales normales."*
 
-### ¿Por qué elegimos la Opción B (Agente con herramientas)?
+### ¿Por qué la Opción B (Agente con herramientas)?
 La arquitectura de agente permite integrar la capacidad conversacional y la flexibilidad de un modelo de lenguaje (LLM) con funciones deterministas en Python (usando NumPy y Scikit-learn). De esta manera, el modelo no alucina ni calcula métricas complejas directamente, sino que decide cuándo invocar herramientas numéricas exactas para procesar los patrones neuronales.
 
 ### Alcance y Limitaciones
@@ -32,7 +32,7 @@ La arquitectura de agente permite integrar la capacidad conversacional y la flex
 ## 2. Datos y Herramientas
 
 ### Origen de los datos
-Se utilizarán conjuntos de datos sintéticos estructurados en formato CSV que simulan series temporales de tasa de disparo neuronal y métricas de amplitud espectral. Los archivos de prueba estarán disponibles en la carpeta `data/` de este repositorio.
+Se utilizarán conjuntos de datos reales en formato CSV obtenidos de repositorios públicos de investigación y plataformas de ciencia de datos (como Kaggle), correspondientes a registros de series temporales de actividad neuronal y métricas electrofisiológicas. Los archivos de prueba estarán disponibles en la carpeta `data/` de este repositorio.
 
 ### Herramientas definidas para el Agente
 1. `analizar_patron_neuronal`: Recibe el identificador de un paciente o la ruta a un archivo CSV. Calcula métricas de dispersión, desviaciones estándar y ejecuta un algoritmo de detección de anomalías (como *Isolation Forest* o umbrales estadísticos) para identificar picos de actividad anormales.
